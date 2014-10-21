@@ -1,0 +1,47 @@
+<!doctype html>
+
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Get WordPress theme and plugins stats! WordPress Plugins API , WordPress Theme API</title>
+  <meta name="description" content="Get the stats of your WordPress theme and plugins. You can also use API to show the theme stats in your blog.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/main.css" />
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46026945-1', 'wpdownloadstats.appspot.com');
+  ga('send', 'pageview');
+
+</script>
+<div id="wrap">
+	{%if today %}
+		<p>Today = {{ today }}<br />
+		Yesterday = {{ yesterday }}<br />
+		Last Week = {{ lastweek }}<br />
+		All Time = {{ alltime }}<br />
+		Ratings = {%if ratings == 0.0 %}Not Rated yet!{%else %}{{ ratings }} out of 5{%endif%}<br />
+		<h3><a href="/">Check Next!</a></h3>			
+	{%elif failed == 1 %}
+		<p><h1>{{ message }}</h1><br /><a href="/">Try Again!</a></p>
+	{%else %}	
+		<p><div id="smallfont">Enter the theme-slug or plugins-slug in the input box and get the download stats and ratings.
+		</div>
+		</p>	
+		<form method='post' name='myform' action=''>
+		<label><input type="text" placeholder="twentyelevan" size="10" name="slug" id="slug" /></label>
+			<select name="themeorplugin">
+			<option value="Theme" selected="selected">Theme</option>
+			<option value="Plugin">Plugin</option>
+			</select> <a href="/" onclick="document.forms['myform'].submit(); return false;">Show stats!</a>
+		</form><br />
+		<p><div id="smallfont">You can use <u>{{ urlhome }}/getinfo/p/theme-slug</u><br />or<br /><u>{{ urlhome }}/getinfo/t/plugin-slug</u> to get data as json.<br /><br/>Example: <a href="{{ urlhome }}/getinfo/t/clean-black">{{ urlhome }}/getinfo/t/clean-black</a></div></p>
+	{% endif %}
+</div>
+</body>
+</html>
